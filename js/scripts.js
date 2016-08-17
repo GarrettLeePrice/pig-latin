@@ -8,7 +8,12 @@ function checkWord(word){
     var newWord = word.split("");
     var removeLetter = [];
     for(;consonants.includes(newWord[0]);){
-      removeLetter.push(newWord.splice(0,1));
+      if (newWord[0] === "q") {
+        removeLetter.push(newWord.splice(0,1));
+        removeLetter.push(newWord.splice(0,1));
+      } else {
+        removeLetter.push(newWord.splice(0,1));
+      }
 
     }
     removeLetter.push("ay");
@@ -18,11 +23,24 @@ function checkWord(word){
     return word;
   }
 }
+function checkSentence(words) {
+  var sentence = words.split(" ");
+  var sentencePL = [];
+  sentence.forEach(function(element){
+    sentencePL.push(checkWord(element));
+  });
+  return sentencePL.join(" ");
+}
+
+
+
+
+
 
 $(document).ready(function(){
   $("#submitBtn").click(function(){
-    var word = $("#input").val();
-    alert(checkWord(word));
+    var entered = $("#input").val();
+    alert(checkSentence(entered));
   });
 
 });
